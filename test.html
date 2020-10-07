@@ -10,7 +10,7 @@
     <title>Document</title>
     <style>
         #wand{
-            top:20%;
+            top:15%;
             position:absolute;
             -webkit-animation:linear ;
             -webkit-animation-name: run;
@@ -20,11 +20,17 @@
             0% { left: 25%; transform: rotate(-60deg);}
             100%{ left: 40%; transform: rotate(40deg);}
         }
+
+        #title{
+          text-align: center;
+          font-size: xx-large;
+        }
         #question{
           font-size: xx-large;
           margin: 60px;
           text-align: center;
           visibility: hidden;
+          color: #797676;
         }
 
         *, *::before, *::after {
@@ -61,9 +67,9 @@ body {
 .option-grid {
   display: grid;
   grid-template-columns: repeat(2, auto);
-  gap: 10px;
-  margin: 20px 0;
-  justify-content: space-around;
+  gap: 25px;
+  margin: 20px 0 120px 0;
+  justify-content: center;
 }
 
 .option {
@@ -100,13 +106,14 @@ html {
 <body>
   <div class="container">
     <div id="wand"><img src="Wand.svg" width="100px" height="100px"/></div>
+    <div id="title"><u>Choose the picture that match the word</u></div>
     <div id='question'>Grasshopper</div>  
         <!-- <div id="question-container" class="hide"> -->
                 <div id="options" class="option-grid">
-                    <button class="option animate__animated" data-correct="true" id="1"><img src="background-ws-EN.png" width="150px" height="150px"/></button>
-                    <button class="option animate__animated" ><img src="background-ws-EN.png" width="150px" height="150px"/></button>
-                    <button class="option animate__animated" ><img src="background-ws-EN.png" width="150px" height="150px"/></button>
-                    <button class="option animate__animated" ><img src="background-ws-EN.png" width="150px" height="150px"/></button>
+                    <button class="option animate__animated" ><img src="image/c2c31c93b2aeddf396e3d16312ee202f" width="250px" height="150px"/></button>
+                    <button class="option animate__animated" ><img src="image/7792b6944d73980bce6cd0f03e652738" width="250px" height="150px"/></button>
+                    <button class="option animate__animated" ><img src="image/0de80876191a0bc66f904c337a45ee81" width="250px" height="150px"/></button>
+                    <button class="option animate__animated" data-correct="true"><img src="image/51ed687b74c994703884e76b2576c889" width="250px" height="150px"/></button>
                 </div>
           <!-- </div> -->
     </div>
@@ -128,6 +135,12 @@ html {
       option.addEventListener("click", function(e) {
         let a = e.currentTarget; 
         if (a.dataset.correct)  {
+          for (var j = 0; j < options.length; j++) {
+            if (a != options[j]) {
+              options[j].classList.add('animate__fadeOut', 'animate__faster');
+            }
+          }
+          a.classList.add('animate__zoomInRight');
           console.log("correct")
         } else {
           console.log("false")
@@ -160,7 +173,7 @@ html {
         ]
       }
     ];
-    setQuestion();
+    // setQuestion();
 
 </script>
 </html>
