@@ -3,177 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
     <title>Document</title>
-    <style>
-        #wand{
-            top:15%;
-            position:absolute;
-            -webkit-animation:linear ;
-            -webkit-animation-name: run;
-            -webkit-animation-duration: 1s;
-        }     
-        @-webkit-keyframes run {
-            0% { left: 25%; transform: rotate(-60deg);}
-            100%{ left: 40%; transform: rotate(40deg);}
-        }
-
-        #title{
-          text-align: center;
-          font-size: xx-large;
-        }
-        #question{
-          font-size: xx-large;
-          margin: 60px;
-          text-align: center;
-          visibility: hidden;
-          color: #797676;
-        }
-
-        *, *::before, *::after {
-                box-sizing: border-box;
-        }
-
-:root {
-  --hue-neutral: 200;
-  --hue-wrong: 0;
-  --hue-correct: 145;
-}
-
-body {
-  --hue: var(--hue-neutral);
-  padding: 0;
-  margin: 0;
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  background-color: #5688ff;
-}
-
-.container {
-  width: 800px;
-  max-width: 80%;
-  background-color: white;
-  border-radius: 5px;
-  padding: 10px;
-  box-shadow: 0 0 10px 2px;
-}
-
-.option-grid {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 25px;
-  margin: 20px 0 120px 0;
-  justify-content: center;
-}
-
-.option {
-  border: 5px solid #979797;
-    border-radius: 5px;
-    width: fit-content;
-}
-
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hide {
-  display: none;
-}
-
-html {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #DFDFDF;
-}
-
-.wrong{
-
-}
-
-    </style>
 </head>
 <body>
-  <div class="container">
-    <div id="wand"><img src="Wand.svg" width="100px" height="100px"/></div>
-    <div id="title"><u>Choose the picture that match the word</u></div>
-    <div id='question'>Grasshopper</div>  
-        <!-- <div id="question-container" class="hide"> -->
-                <div id="options" class="option-grid">
-                    <button class="option animate__animated" ><img src="image/c2c31c93b2aeddf396e3d16312ee202f" width="250px" height="150px"/></button>
-                    <button class="option animate__animated" ><img src="image/7792b6944d73980bce6cd0f03e652738" width="250px" height="150px"/></button>
-                    <button class="option animate__animated" ><img src="image/0de80876191a0bc66f904c337a45ee81" width="250px" height="150px"/></button>
-                    <button class="option animate__animated" data-correct="true"><img src="image/51ed687b74c994703884e76b2576c889" width="250px" height="150px"/></button>
-                </div>
-          <!-- </div> -->
+    <button id="start" style="position: absolute; top:50px; left: 50px;">start</button>
+    <div class="container">
+        <div id="wand">
+            <img src="image/Wand.svg" width="80px" height="80px"/>
+            <audio id="startAudio"><source src="audio/Magic Word Game sound.mp3"></audio>
+        </div>
+        <div id="title"><u>Choose the picture that match the word</u></div>
+        <div id='question'>Grasshopper</div>  
+        <div id="options" class="option-grid"></div>
     </div>
 </body>
-<script>
-    let el        = document.getElementById('wand');
-    const question= document.getElementById('question'); 
-    const options = document.getElementsByClassName('option');
-    // let answer  = document.getElementById('1'); 
-    // answer.dataset.correct = true;
-    el.addEventListener("animationend", function() {
-        el.style.display = 'none';
-        question.style.visibility = 'visible';
-        question.className = 'animate__animated animate__fadeIn';
-    }, false);
-    
-    for (var i = 0; i < options.length; i++){
-      let option = options[i];
-      option.addEventListener("click", function(e) {
-        let a = e.currentTarget; 
-        if (a.dataset.correct)  {
-          for (var j = 0; j < options.length; j++) {
-            if (a != options[j]) {
-              options[j].classList.add('animate__fadeOut', 'animate__faster');
-            }
-          }
-          a.classList.add('animate__zoomInRight');
-          console.log("correct")
-        } else {
-          console.log("false")
-          a.classList.add('animate__headShake', 'animate__faster');
-          a.addEventListener("animationend", () => {a.classList.remove('animate__headShake', 'animate__faster')});
-        }
-      });
-    };
-
-    // document.onload = () => {
-    // }
-
-    setQuestion = () => {
-      question.innerText = questions[0].question;
-      questions[0].options.forEach(option => {
-        let btn = document.createElement('button');
-
-      });
-    }
-
-
-    const questions = [
-      {
-        question: 'question 1',
-        options: [
-          {title: 'a', img: 'abc.png', correct: true},
-          {title: 'b', img: 'abc.png', correct: false},
-          {title: 'c', img: 'abc.png', correct: false},
-          {title: 'd', img: 'abc.png', correct: false},
-        ]
-      }
-    ];
-    // setQuestion();
-
-</script>
+<script src="js/app.js"></script>
 </html>
