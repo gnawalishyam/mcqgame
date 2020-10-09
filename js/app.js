@@ -33,14 +33,12 @@ setQuestion = () => {
         btn.appendChild(img);
         options.appendChild(btn);
     });
-
-
 }
 
 const questions = [
     {
         question: 'Grasshopper',
-        audio: 'audio/Magic Word Game sound.mp3',
+        audio: 'audio/grasshopper-audio.mp3',
         options: [
             {title: 'element', img: 'image/c2c31c93b2aeddf396e3d16312ee202f', correct: false},
             {title: 'b', img: 'image/7792b6944d73980bce6cd0f03e652738', correct: false},
@@ -54,6 +52,7 @@ setQuestion();
 addClickEvent = (options) => {
     for (var i = 0; i < options.length; i++){
         let option = options[i];
+        let flag = true;
         option.addEventListener("click", function(e) {
             let btnCorrect = e.currentTarget; 
             if (btnCorrect.dataset.correct)  {
@@ -62,9 +61,14 @@ addClickEvent = (options) => {
                         options[j].classList.add('animate__fadeOut', 'animate__faster');
                     }
                 }
-                correctAnimation(btnCorrect);
-                const audio = document.getElementById('audio-correct');
-                audio.play();
+                if (flag) {
+                    console.log(flag)
+                    starAnimation(btnCorrect);
+                    flag = false
+                }else {
+                    const audio = document.getElementById('audio-correct');
+                    audio.play();
+                }
             } else {
                 btnCorrect.classList.add('animate__headShake', 'animate__faster');
                 btnCorrect.addEventListener("animationend", () => {btnCorrect.classList.remove('animate__headShake', 'animate__faster')});
@@ -73,6 +77,25 @@ addClickEvent = (options) => {
             }
         });
     };
+}
+
+starAnimation = (element) => {
+    const star = document.getElementById('star');
+    document.getElementById('startAudio').play();
+    let top = element.offsetTop;
+    let left= element.offsetLeft+75;
+    star.style.top = top+'px';
+    star.style.left = left+'px';
+    star.style.visibility = 'visible';
+    element.classList.remove('option-hover');
+    star.classList.add('animate__animated', 'animate__zoomIn', 'animate__faster');
+    setTimeout(function() {
+        star.classList.add('glow')
+    }, 400);
+    star.addEventListener("animationend", function() {
+        star.style.visibility = 'hidden';
+        correctAnimation(element);
+    })
 }
 
 correctAnimation = (element) => {
@@ -109,6 +132,9 @@ correctAnimation = (element) => {
         element.style.width = growWidth + 'px';
         element.style.height =  growHeight + 'px';
     }, false);
+
+    const audio = document.getElementById('audio-correct');
+    audio.play();
 }
 
 addClickEvent(optionsList);

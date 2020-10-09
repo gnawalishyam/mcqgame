@@ -99,4 +99,25 @@ body {
     -webkit-animation-duration: 1s;
 } 
 
+#star{
+    position: absolute;
+    font-size: 100px;
+    visibility: hidden;
+    color: #fdd11b;
+}
 
+.glow {
+    -webkit-animation: glow 1s 2 linear  alternate;
+    -moz-animation: glow 1s 2 linear  alternate;
+    animation: glow 1s 3 linear  alternate;
+}
+
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ffcc00, 0 0 40px #ffcc00, 0 0 50px #ffcc00, 0 0 60px #ffcc00, 0 0 70px #ffcc00;
+    }
+    
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #fde689, 0 0 40px #fde689, 0 0 50px #fde689, 0 0 60px #fde689, 0 0 70px #fde689, 0 0 80px #fde689;
+    }
+}
