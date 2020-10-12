@@ -3,9 +3,18 @@ const question = document.getElementById('question');
 const option = document.getElementById('options');
 const optionsList = document.getElementsByClassName('option');
 const start = document.getElementById('start');
+const startBounce = document.getElementById('start-bounce');
 
 start.addEventListener("click", function() {
+    wand.style.visibility = 'visible';
     wand.className = 'wand-animation';
+})
+
+startBounce.addEventListener("click", function() {
+    // wand.style.left = '45%';
+    // wand.className = 'animate__animated animate__bounceInDown';
+    // ball.style.visibility = 'visible';
+    ball.className = 'bounce-animation';
 })
 
 wand.addEventListener("animationend", function() {
@@ -112,8 +121,10 @@ correctAnimation = (element) => {
     let containerW = container.clientWidth;
     let containerH = container.clientHeight;
 
-    let left = (containerW / 2) - (growWidth / 2) + container.offsetLeft;
-    let top = (containerH / 2) - (growHeight / 2) + container.offsetTop;
+    // let left = (containerW / 2) - (growWidth / 2) + container.offsetLeft;
+    // let top = (containerH / 2) - (growHeight / 2) + container.offsetTop;
+    let left = (containerW / 2) - (growWidth / 2);
+    let top = (containerH / 2) - (growHeight / 2);
 
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';

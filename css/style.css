@@ -29,13 +29,15 @@ body {
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 0 10px 2px;
+    position: relative;
 }
 
 #wand{
-    top:20%;
+    top: 12%;
     left: 25%;
     transform: rotate(-60deg);
-    position:absolute;
+    position: absolute;
+    visibility: hidden;
 }
 .wand-animation{
     -webkit-animation:linear ;
@@ -43,8 +45,8 @@ body {
     -webkit-animation-duration: .5s;
 }     
 @-webkit-keyframes run {
-    0% { left: 25%; transform: rotate(-60deg);}
-    100%{ left: 40%; transform: rotate(40deg);}
+    0% { }
+    100%{ left: 45%; transform: rotate(40deg);}
 }
 
 #title{
@@ -120,4 +122,31 @@ body {
     to {
         text-shadow: 0 0 20px #fff, 0 0 30px #fde689, 0 0 40px #fde689, 0 0 50px #fde689, 0 0 60px #fde689, 0 0 70px #fde689, 0 0 80px #fde689;
     }
+}
+
+#ball {
+    top: 12%;
+    left: 45%;
+    position: absolute;
+    /* visibility: hidden;; */
+}
+.bounce-animation {
+    /* -webkit-animation: bounce 1s 2 linear  alternate;
+    -moz-animation: bounce 1s 2 linear  alternate; */
+    animation: bounce1 2s 1 linear ;
+}
+
+@-webkit-keyframes bounce1 {
+    /* 0% {} */
+    0% { transform: translateY(-180px) translateX(-200px);} 
+    25%{ transform: translateY(-50px) translateX(-125px);} 
+    48%{ transform: translateY(-100px) translateX(-50px);}
+    50%{ transform: translateY(-100px) translateX(-48px);}
+    /* down */
+    66%{ transform: translateY(-30px) translateX(-25px);} 
+    78%{ transform: translateY(-40px) translateX(-15px);}
+    90%{ transform: translateY(-5px) translateX(-10px);}
+    95%{ transform: translateY(-10px) translateX(-5px);}
+    100%{ transform: translateY(0px) translateX(0px);}
+    /* 100%{  transform: translateY(-75px) translateX(-125px);} */
 }
