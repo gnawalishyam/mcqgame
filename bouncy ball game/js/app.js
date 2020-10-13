@@ -1,27 +1,10 @@
-const wand = document.getElementById('wand');
 const ball = document.getElementById('ball');
 const question = document.getElementById('question');
 const option = document.getElementById('options');
 const optionsList = document.getElementsByClassName('option');
-const start = document.getElementById('start');
 const startBounce = document.getElementById('start-bounce');
 
-start.addEventListener("click", function() {
-    wand.style.visibility = 'visible';
-    wand.className = 'wand-animation';
-})
-
-wand.addEventListener("animationend", function() {
-    wand.style.display = 'none';
-    question.style.visibility = 'visible';
-    question.className = 'animate__animated animate__fadeIn';
-    document.getElementById('startAudio').play();
-}, false);
-
 startBounce.addEventListener("click", function() {
-    // wand.style.left = '45%';
-    // wand.className = 'animate__animated animate__bounceInDown';
-    // ball.style.visibility = 'visible';
     ball.className = 'bounce-animation';
     var audio = document.getElementById('startBallAudio');
     setTimeout(function(){audio.play()}, 400)
