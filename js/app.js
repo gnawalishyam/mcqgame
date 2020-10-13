@@ -1,4 +1,5 @@
 const wand = document.getElementById('wand');
+const ball = document.getElementById('ball');
 const question = document.getElementById('question');
 const option = document.getElementById('options');
 const optionsList = document.getElementsByClassName('option');
@@ -10,19 +11,30 @@ start.addEventListener("click", function() {
     wand.className = 'wand-animation';
 })
 
-startBounce.addEventListener("click", function() {
-    // wand.style.left = '45%';
-    // wand.className = 'animate__animated animate__bounceInDown';
-    // ball.style.visibility = 'visible';
-    ball.className = 'bounce-animation';
-})
-
 wand.addEventListener("animationend", function() {
     wand.style.display = 'none';
     question.style.visibility = 'visible';
     question.className = 'animate__animated animate__fadeIn';
     document.getElementById('startAudio').play();
 }, false);
+
+startBounce.addEventListener("click", function() {
+    // wand.style.left = '45%';
+    // wand.className = 'animate__animated animate__bounceInDown';
+    // ball.style.visibility = 'visible';
+    ball.className = 'bounce-animation';
+    var audio = document.getElementById('startBallAudio');
+    setTimeout(function(){audio.play()}, 400)
+})
+
+ball.addEventListener("animationend", function() {
+    var audio = document.getElementById('audio-correct');
+    audio.play();
+})
+ball.addEventListener("click", function() {
+    var audio = document.getElementById('audio-correct');
+    audio.play();
+})
 
 setQuestion = () => {
     question.innerText = questions[0].question;
