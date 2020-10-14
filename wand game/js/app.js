@@ -3,26 +3,54 @@ const question = document.getElementById('question');
 const option = document.getElementById('options');
 const optionsList = document.getElementsByClassName('option');
 const start = document.getElementById('start');
+let correctOption;
+let correctAudio;
 
 start.addEventListener("click", function() {
     wand.style.visibility = 'visible';
     wand.className = 'wand-animation';
 })
 
-wand.addEventListener("animationend", function() {
+wand.addEventListener("animationend", function(e) {
     wand.style.display = 'none';
     question.style.visibility = 'visible';
     question.className = 'animate__animated animate__fadeIn animate__slow';
     document.getElementById('startAudio').play();
+
+    var xOffset = 0;
+    var yOffset = 0;
+    document.getElementById('puff').style.left = '45%';
+    document.getElementById('puff').style.top =  '12%';
+    document.getElementById('puff').style.display = 'block';
+    animatePoof();
 }, false);
+
+function animatePoof() {
+    var bgTop = 0,
+        frame = 0,
+        frames = 6,
+        frameSize = 32,
+        frameRate = 80,
+        puff = document.getElementById('puff');
+    var animate = function(){
+        if(frame < frames){
+            puff.style.backgroundPosition = "0 "+bgTop+"px";
+            bgTop = bgTop - frameSize;
+            frame++;
+            setTimeout(animate, frameRate);
+        }
+    };
+    
+    animate();
+    // setTimeout("document.getElementById('puff').style.display = 'none'", frames * frameRate);
+}
 
 setQuestion = () => {
     question.innerText = questions[0].question;
-    const audio = document.createElement('audio');
-    audio.src = questions[0].audio;
-    audio.id = 'audio-correct'
-    question.appendChild(audio);
-    question.addEventListener("click", () => {audio.play();});
+    correctAudio = document.createElement('audio');
+    correctAudio.src = questions[0].audio;
+    correctAudio.id = 'audio-correct'
+    question.appendChild(correctAudio);
     questions[0].options.forEach(option => {
         let btn = document.createElement('button');
         let img = document.createElement('img');
@@ -50,6 +78,24 @@ const questions = [
 ];
 setQuestion();
 
+question.addEventListener("click", () => {
+    let audio = document.getElementById('audio-correct');
+    question.style.cursor = 'default';
+    question.style.color = '#2463f7';
+    if (correctSelected) { correctSelected.style.border = '5px solid #2463f7';}
+    audio.play();
+    // audio.addEventListener('ended', () => {
+    //     console.log('ende')
+    // })
+});
+
+correctAudio.addEventListener('ended', () => {
+    question.style.cursor = 'pointer';
+    question.style.color = '#797676';
+    if (correctSelected) { correctSelected.style.border = '5px solid #979797';}
+})
+
+
 addClickEvent = (options) => {
     for (var i = 0; i < options.length; i++){
         let option = options[i];
@@ -60,15 +106,20 @@ addClickEvent = (options) => {
                 for (var j = 0; j < options.length; j++) {
                     if (btnCorrect != options[j]) {
                         options[j].classList.add('animate__fadeOut', 'animate__faster');
+                        options[j].addEventListener("animationend", function(e) {
+                            e.target.style.visibility = 'hidden'
+                        })
                     }
                 }
+                correctSelected = btnCorrect;
+                correctSelected.style.border = '5px solid #2463f7';
                 if (flag) {
-                    console.log(flag)
                     starAnimation(btnCorrect);
                     flag = false
                 }else {
                     const audio = document.getElementById('audio-correct');
                     audio.play();
+                    question.style.color = '#2463f7';
                 }
             } else {
                 btnCorrect.classList.add('animate__headShake', 'animate__faster');
@@ -82,17 +133,19 @@ addClickEvent = (options) => {
 
 starAnimation = (element) => {
     const star = document.getElementById('star');
-    document.getElementById('startAudio').play();
-    let top = element.offsetTop;
-    let left= element.offsetLeft+75;
+    var audio = new Audio('audio/Star Sound - magic-chime-01.mp3')
+    audio.play();
+    let top = element.offsetTop - 182;
+    let left= element.offsetLeft - 103;
     star.style.top = top+'px';
     star.style.left = left+'px';
     star.style.visibility = 'visible';
     element.classList.remove('option-hover');
-    star.classList.add('animate__animated', 'animate__zoomIn', 'animate__faster');
+    // star.classList.add('animate__animated', 'animate__zoomIn', 'animate__faster');
     setTimeout(function() {
-        star.classList.add('glow')
-    }, 400);
+        star.classList.add('animate__animated', 'animate__fadeOut')
+        // star.style.visibility = 'hidden';
+    }, 1500);
     star.addEventListener("animationend", function() {
         star.style.visibility = 'hidden';
         correctAnimation(element);
@@ -117,6 +170,8 @@ correctAnimation = (element) => {
     // let top = (containerH / 2) - (growHeight / 2) + container.offsetTop;
     let left = (containerW / 2) - (growWidth / 2);
     let top = (containerH / 2) - (growHeight / 2);
+
+    question.style.color = '#2463f7';
 
     var cssAnimation = document.createElement('style');
     cssAnimation.type = 'text/css';
