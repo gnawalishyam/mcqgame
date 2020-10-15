@@ -52,11 +52,11 @@ body {
 #title{
     text-align: center;
     color: #797676;
-    font-size: xx-large;
+    font-size: 32px;
 }
 
 #question{
-    font-size: xxx-large;
+    font-size: 64px;
     margin: 50px;
     text-align: center;
     visibility: hidden;
@@ -87,6 +87,7 @@ body {
 .option-hover:hover {
     /* background-color: #9797979c; */
     background-color: #4680c24f;
+    box-shadow: 0 0 5px 1px rgb(92, 92, 92);
 }
 
 .option-img {
@@ -99,7 +100,7 @@ body {
 .correct{
     -webkit-animation:linear ;
     -webkit-animation-name: growCenter;
-    -webkit-animation-duration: .75s;
+    -webkit-animation-duration: .60s;
 } 
 
 #star{
@@ -174,6 +175,6 @@ body {
     height:32px;
     width:32px;
     background: url(http://i.imgur.com/wvPeK.png) no-repeat;
-    transform: scale(4);
+    transform: scale(16,4);
     transform-origin: 0% 0% 0px;
 }

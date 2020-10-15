@@ -3,7 +3,7 @@ const question = document.getElementById('question');
 const option = document.getElementById('options');
 const optionsList = document.getElementsByClassName('option');
 const start = document.getElementById('start');
-let correctOption;
+let correctSelected;
 let correctAudio;
 
 start.addEventListener("click", function() {
@@ -11,6 +11,9 @@ start.addEventListener("click", function() {
     wand.className = 'wand-animation';
 })
 
+$( document ).ready( () => {
+    start.click();
+})
 wand.addEventListener("animationend", function(e) {
     wand.style.display = 'none';
     question.style.visibility = 'visible';
@@ -19,7 +22,7 @@ wand.addEventListener("animationend", function(e) {
 
     var xOffset = 0;
     var yOffset = 0;
-    document.getElementById('puff').style.left = '45%';
+    document.getElementById('puff').style.left = '20%';
     document.getElementById('puff').style.top =  '12%';
     document.getElementById('puff').style.display = 'block';
     animatePoof();
@@ -82,8 +85,8 @@ question.addEventListener("click", () => {
     let audio = document.getElementById('audio-correct');
     question.style.cursor = 'default';
     question.style.color = '#2463f7';
-    if (correctSelected) { correctSelected.style.border = '5px solid #2463f7';}
     audio.play();
+    if (correctSelected) { correctSelected.style.border = '5px solid #2463f7';}
     // audio.addEventListener('ended', () => {
     //     console.log('ende')
     // })
@@ -143,9 +146,9 @@ starAnimation = (element) => {
     element.classList.remove('option-hover');
     // star.classList.add('animate__animated', 'animate__zoomIn', 'animate__faster');
     setTimeout(function() {
-        star.classList.add('animate__animated', 'animate__fadeOut')
+        star.classList.add('animate__animated', 'animate__fadeOut', 'animate__faster')
         // star.style.visibility = 'hidden';
-    }, 1500);
+    }, 1200);
     star.addEventListener("animationend", function() {
         star.style.visibility = 'hidden';
         correctAnimation(element);
