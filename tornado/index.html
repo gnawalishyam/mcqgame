@@ -12,21 +12,24 @@
     <div class="container">
         <div id="title"><u><b>Put the word in the correct order.</b></u></div>
         <div class="words">
-            <div class='word'>the</div>
-            <div class='word'>food</div>
-            <div class='word'>asked</div>
-            <div class='word'>Grasshopper</div>
-            <div class='word'>Grasshopper</div>
-            <div class='word'>Grasshopper</div>
-            <div class='word'>Grasshopper</div>
-            <div class='word'>Grasshopper</div>
+            <div class='word' id="the" draggable="true" ondragstart="drag(event)" ondrag="dra(event)">
+                the
+                <audio id="the-audio"><source src="audio/grasshopper-audio.mp3"></audio>
+            </div>
+            <div class='word' draggable="true">food</div>
+            <div class='word' draggable="true">asked</div>
+            <div class='word' draggable="true">Grasshopper</div>
+            <div class='word' draggable="true">Grasshopper</div>
+            <div class='word' draggable="true">Grasshopper</div>
+            <div class='word' draggable="true">Grasshopper</div>
+            <div class='word' draggable="true">Grasshopper</div>
         </div>
-        <div class="answer">
+        <div class="answer" id="answer1" ondrop="drop(event)" ondragover="allowDrop(event)">
             <div class='word '>Grasshopper</div>
             <div class='word '>Grasshopper</div>
 
         </div>
-        <div class="answer">
+        <div class="answer" >
             <!-- <div class='word no-botom-margin'>Grasshopper</div>
             <div class='word no-botom-margin'>Grasshopper</div> -->
 
