@@ -33,9 +33,10 @@ function drag(ev) {
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
+    document.getElementById(data).style.position = 'inherit';
     ev.target.appendChild(document.getElementById(data));
     answer.style.backgroundColor = 'white';
-
+    console.log(ev.target)
 }
 
 function dra(ev) {
@@ -61,6 +62,7 @@ load = () => {
         let div = document.createElement('div');
         div.id = element.value;
         div.classList.add('word');
+        div.draggable = true;
         div.innerText = element.word;
         let wordAudio = document.createElement('audio');
         wordAudio.id = `${element.value}-audio`
@@ -71,13 +73,24 @@ load = () => {
         // left.push(div.offsetLeft);
         // top.push(div.offsetTop);
         // console.log(div.offsetLeft)
+        wordAudio.addEventListener('ended', () => {
+            div.classList.remove('word-selected');
+            div.style.top = div.offsetTop-3+'px';
+            div.style.left = div.offsetLeft-3+'px';
+        })
         div.addEventListener('click', () => {
             div.classList.add('word-selected');
+            div.style.top = div.offsetTop-7+'px';
+            div.style.left = div.offsetLeft-7+'px';
             wordAudio.play();
-            wordAudio.addEventListener('ended', () => {
-                div.classList.remove('word-selected');
-            })
         })
+        // div.addEventListener('mousedown', () => {
+        //     div.classList.add('word-selected');
+        //     wordAudio.play();
+
+        // })
+        div.addEventListener('dragstart', drag);
+        div.addEventListener('drag', dra);
     });
 
     let wordsDiv = document.querySelector('.words');

@@ -58,8 +58,11 @@ body {
 
 .word-selected {
     font-size: 36px;
-    display: initial;
+    /* top: auto !important;
+    left: auto !important; */
+    /* display: block; */
     color: #1360f1;
+    z-index: 2;
 }
 
 .answer {
